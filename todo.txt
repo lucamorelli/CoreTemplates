@@ -1,0 +1,3 @@
+angular 
+. npm install 
+. run clean-deps copy-deps

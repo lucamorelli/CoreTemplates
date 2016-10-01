@@ -1,0 +1,34 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular2 playground</title>
+
+    <link href="libs/bootstrap/css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="libs/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css">
+    <base href="/app">
+
+    <script src="libs/jquery/jquery.js"></script>
+    <script src="libs/bootstrap/js/bootstrap.js"></script>
+
+    <!-- ES6-related imports -->
+    <script src="libs/core-js/shim.min.js"></script>
+
+    <script src="libs/zone.js/zone.js"></script>
+    <script src="libs/reflect-metadata/Reflect.js"></script>
+    <script src="libs/systemjs/system.src.js"></script>
+
+    <script src="systemjs.config.js"></script>
+
+    <script>
+        //bootstrap the Angular2 application
+        System.import('app').catch(console.log.bind(console));
+    </script>
+</head>
+
+<body>
+    <app>Loading...</app>
+</body>
+
+</html>
