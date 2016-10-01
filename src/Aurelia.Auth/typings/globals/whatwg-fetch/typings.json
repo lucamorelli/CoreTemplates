@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/Aurelia/Fetch-client/master/doc/whatwg-fetch.d.ts",
+    "raw": "github:Aurelia/Fetch-client/doc/whatwg-fetch.d.ts",
+    "typings": "https://raw.githubusercontent.com/Aurelia/Fetch-client/master/doc/whatwg-fetch.d.ts"
+  }
+}

@@ -8,12 +8,15 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F482587A-E438-4157-9289-F31CF2B66188}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
+		E:\Downloads\openiddict-samples-master\NuGet.config = E:\Downloads\openiddict-samples-master\NuGet.config
 		todo.txt = todo.txt
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Angular", "src\Angular\Angular.xproj", "{5C733342-49A9-4ACF-9D40-DE7B67B526D7}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Aurelia", "src\Aurelia\Aurelia.xproj", "{F1FA08BC-40D3-4060-B495-471B4C692FFE}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Aurelia.Auth", "src\Aurelia.Auth\Aurelia.Auth.xproj", "{EC055356-1193-44CB-94B6-88AF17EC2117}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +32,10 @@ Global
 		{F1FA08BC-40D3-4060-B495-471B4C692FFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1FA08BC-40D3-4060-B495-471B4C692FFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1FA08BC-40D3-4060-B495-471B4C692FFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC055356-1193-44CB-94B6-88AF17EC2117}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC055356-1193-44CB-94B6-88AF17EC2117}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC055356-1193-44CB-94B6-88AF17EC2117}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC055356-1193-44CB-94B6-88AF17EC2117}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,5 +43,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{5C733342-49A9-4ACF-9D40-DE7B67B526D7} = {59070090-C342-4444-99D2-C8AA89084B63}
 		{F1FA08BC-40D3-4060-B495-471B4C692FFE} = {59070090-C342-4444-99D2-C8AA89084B63}
+		{EC055356-1193-44CB-94B6-88AF17EC2117} = {59070090-C342-4444-99D2-C8AA89084B63}
 	EndGlobalSection
 EndGlobal
