@@ -243,4 +243,5 @@ ModelManifest.xml
 
 # typescript generated javascript files
 wwwroot/app/
+# js libraries installed via npm
 wwwroot/libs/
