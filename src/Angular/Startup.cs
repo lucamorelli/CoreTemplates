@@ -28,7 +28,18 @@ namespace Angular
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc()
+                // uncomment this if you want that serializing objects in the api results the casing is respected
+                //.AddJsonOptions(options => {
+
+                //    var resolver = options.SerializerSettings.ContractResolver;
+                //    if (resolver != null)
+                //    {
+                //        var res = resolver as DefaultContractResolver;
+                //        res.NamingStrategy = null;  // <<!-- this removes the camelcasing
+                //    }
+                //})
+                ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,6 +47,14 @@ namespace Angular
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            var options = new DefaultFilesOptions
+            {
+                DefaultFileNames = new[] { "default.html", "index.html" }
+            };
+            app.UseDefaultFiles(options);
+
+            app.UseStaticFiles();
 
             app.UseMvc();
         }

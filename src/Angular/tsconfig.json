@@ -11,7 +11,7 @@
     "outDir": "wwwroot/app/",
     "removeComments": false,
     "target": "es5",
-    "sourceRoot": "scripts",
+    "sourceRoot": "app",
     "lib": ["es5","es6","dom"]
   },
   "exclude": [
