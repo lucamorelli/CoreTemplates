@@ -27,6 +27,13 @@ namespace AureliaAuth
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
+
+            if (env.IsDevelopment())
+            {
+                // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
+                builder.AddUserSecrets();
+            }
+
             Configuration = builder.Build();
         }
 
@@ -169,7 +176,25 @@ namespace AureliaAuth
 
             app.UseOpenIddict();
 
-            app.UseMvcWithDefaultRoute();
+            if (env.IsDevelopment())
+            {
+                app.UseBrowserLink();
+                app.UseDeveloperExceptionPage();
+            }
+
+
+            //            app.UseMvcWithDefaultRoute();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute("default",
+                                "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute("spa-fallback",
+                                "{*anything}",
+                                new { controller = "Home", action = "Index" });
+                //routes.MapWebApiRoute("defaultApi",
+                //                      "api/{controller}/{id?}");
+            });
+
 
             using (var context = new ApplicationDbContext(
                 app.ApplicationServices.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
@@ -216,9 +241,75 @@ namespace AureliaAuth
                         Type = OpenIddictConstants.ClientTypes.Public
                     });
 
+                    context.Applications.Add(new OpenIddictApplication<Guid>
+                    {
+                        ClientId = "Aurelia.OpenIdConnect",
+                        DisplayName = "Aurelia Open Id Connect",
+                        LogoutRedirectUri = "http://localhost:5000/signout-oidc",
+                        RedirectUri = "http://localhost:5000/signin-oidc",
+                        Type = OpenIddictConstants.ClientTypes.Public
+                    });
+
+                    context.Applications.Add(new OpenIddictApplication<Guid>
+                    {
+                        ClientId = "ResourceServer01",
+                        ClientSecret = Crypto.HashPassword("secret_secret_secret"),
+                        Type = OpenIddictConstants.ClientTypes.Confidential
+                    });
+
+                    context.Applications.Add(new OpenIddictApplication<Guid>
+                    {
+                        ClientId = "ResourceServer02",
+                        ClientSecret = Crypto.HashPassword("secret_secret_secret"),
+                        Type = OpenIddictConstants.ClientTypes.Confidential
+                    });
+
+
                     context.SaveChanges();
                 }
             }
         }
+
+        private void SeedDatabase(IApplicationBuilder app)
+        {
+            var options = app
+                .ApplicationServices
+                .GetRequiredService<DbContextOptions<ApplicationDbContext>>();
+
+            using (var context = new ApplicationDbContext(options))
+            {
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
+
+                if (!context.Applications.Any())
+                {
+                    context.Applications.Add(new OpenIddictApplication<Guid>
+                    {
+                        ClientId = "Aurelia.OpenIdConnect",
+                        DisplayName = "Aurelia Open Id Connect",
+                        LogoutRedirectUri = "http://localhost:5000/signout-oidc",
+                        RedirectUri = "http://localhost:5000/signin-oidc",
+                        Type = OpenIddictConstants.ClientTypes.Public
+                    });
+
+                    context.Applications.Add(new OpenIddictApplication<Guid>
+                    {
+                        ClientId = "ResourceServer01",
+                        ClientSecret = Crypto.HashPassword("secret_secret_secret"),
+                        Type = OpenIddictConstants.ClientTypes.Confidential
+                    });
+
+                    context.Applications.Add(new OpenIddictApplication<Guid>
+                    {
+                        ClientId = "ResourceServer02",
+                        ClientSecret = Crypto.HashPassword("secret_secret_secret"),
+                        Type = OpenIddictConstants.ClientTypes.Confidential
+                    });
+                }
+
+                context.SaveChanges();
+            }
+        }
+
     }
 }
