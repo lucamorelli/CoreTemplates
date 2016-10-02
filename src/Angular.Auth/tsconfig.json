@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "noImplicitAny": false,
+    "outDir": "wwwroot/app/",
+    "removeComments": false,
+    "target": "es5",
+    "sourceRoot": "app",
+    "lib": ["es5","es6","dom"]
+  },
+  "exclude": [
+    "node_modules",
+    "wwwroot"
+  ]
+}

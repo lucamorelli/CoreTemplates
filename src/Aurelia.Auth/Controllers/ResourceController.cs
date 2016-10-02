@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using AspNet.Security.OAuth.Validation;
 
-namespace Mvc.Server.Controllers {
+namespace AureliaAuth.Controllers {
     [Route("api")]
     public class ResourceController : Controller {
         [Authorize(ActiveAuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]

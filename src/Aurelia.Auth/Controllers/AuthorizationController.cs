@@ -19,7 +19,7 @@ using Mvc.Server.ViewModels.Shared;
 using OpenIddict;
 using AureliaAuth.Models;
 
-namespace Mvc.Server {
+namespace AureliaAuth.Server {
     public class AuthorizationController : Controller {
         private readonly OpenIddictApplicationManager<OpenIddictApplication<Guid>> _applicationManager;
         private readonly SignInManager<ApplicationUser> _signInManager;

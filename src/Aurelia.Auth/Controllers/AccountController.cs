@@ -9,7 +9,7 @@ using Mvc.Server.ViewModels.Account;
 using AureliaAuth.Models;
 using AureliaAuth.Services;
 
-namespace Mvc.Server.Controllers {
+namespace AureliaAuth.Controllers {
     [Authorize]
     public class AccountController : Controller {
         private readonly UserManager<ApplicationUser> _userManager;

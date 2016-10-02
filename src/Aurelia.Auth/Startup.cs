@@ -16,6 +16,9 @@ using OpenIddict;
 using NWebsec.AspNetCore.Middleware;
 using CryptoHelper;
 
+// https://aurelia-authentication.spoonx.org
+// https://github.com/spoonx/aurelia-authentication
+
 namespace AureliaAuth
 {
     public class Startup

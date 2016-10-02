@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Mvc.Server.Controllers {
+namespace AureliaAuth.Controllers {
     public class HomeController : Controller {
         public IActionResult Index() {
             return View();

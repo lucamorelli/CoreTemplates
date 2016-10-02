@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Mvc.Server.ViewModels.Shared;
 
-namespace Mvc.Server {
+namespace AureliaAuth.Server {
     public class ErrorController : Controller {
         [HttpGet, HttpPost, Route("~/error")]
         public IActionResult Error(OpenIdConnectResponse response) {
