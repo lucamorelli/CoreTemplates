@@ -1,10 +1,19 @@
 // import {computedFrom} from 'aurelia-framework';
+import { AuthService } from 'aurelia-authentication';
+import { autoinject, inject } from 'aurelia-framework';
 
+@autoinject
 export class Welcome {
   public heading = 'Welcome to the Aurelia Navigation App!';
   public firstName = 'John';
   public lastName = 'Doe';
   private previousValue = this.fullName;
+
+  constructor(private authService: AuthService) {
+      this.authService = authService;
+
+      alert(this.authService.authenticated);
+  };
 
   // Getters can't be directly observed, so they must be dirty checked.
   // However, if you tell Aurelia the dependencies, it no longer needs to dirty check the property.

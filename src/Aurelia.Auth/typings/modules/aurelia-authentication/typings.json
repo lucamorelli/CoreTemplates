@@ -1,0 +1,10 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/spoonx/aurelia-authentication/master/typings.json",
+    "raw": "github:spoonx/aurelia-authentication",
+    "main": "dist/aurelia-authentication.d.ts",
+    "name": "aurelia-authentication",
+    "type": "typings"
+  }
+}

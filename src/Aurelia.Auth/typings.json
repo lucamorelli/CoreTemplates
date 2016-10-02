@@ -26,6 +26,8 @@
     "aurelia-templating": "github:aurelia/templating",
     "aurelia-templating-binding": "github:aurelia/templating-binding",
     "aurelia-templating-resources": "github:aurelia/templating-resources",
-    "aurelia-templating-router": "github:aurelia/templating-router"
+    "aurelia-templating-router": "github:aurelia/templating-router",
+    "aurelia-authentication": "github:spoonx/aurelia-authentication",
+    "aurelia-api": "github:spoonx/aurelia-api"
   }
 }

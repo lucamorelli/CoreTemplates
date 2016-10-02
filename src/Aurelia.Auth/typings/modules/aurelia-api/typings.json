@@ -1,0 +1,10 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/spoonx/aurelia-api/master/typings.json",
+    "raw": "github:spoonx/aurelia-api",
+    "main": "dist/aurelia-api.d.ts",
+    "name": "aurelia-api",
+    "type": "typings"
+  }
+}

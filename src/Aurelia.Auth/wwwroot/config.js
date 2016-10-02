@@ -16,7 +16,7 @@ System.config({
   map: {
     "aurelia-animator-css": "npm:aurelia-animator-css@1.0.1",
     "aurelia-api": "npm:aurelia-api@3.0.0-rc9",
-    "aurelia-authentication": "npm:aurelia-authentication@3.0.0-rc9",
+    "aurelia-authentication": "npm:aurelia-authentication@3.0.0-rc11",
     "aurelia-bootstrapper": "npm:aurelia-bootstrapper@1.0.0",
     "aurelia-dialog": "npm:aurelia-dialog@1.0.0-beta.3.0.0",
     "aurelia-event-aggregator": "npm:aurelia-event-aggregator@1.0.0",
@@ -93,7 +93,7 @@ System.config({
       "aurelia-path": "npm:aurelia-path@1.1.1",
       "extend": "npm:extend@3.0.0"
     },
-    "npm:aurelia-authentication@3.0.0-rc9": {
+    "npm:aurelia-authentication@3.0.0-rc11": {
       "aurelia-api": "npm:aurelia-api@3.0.0-rc9",
       "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.0.0",
       "aurelia-event-aggregator": "npm:aurelia-event-aggregator@1.0.0",
