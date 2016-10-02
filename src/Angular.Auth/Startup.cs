@@ -15,6 +15,8 @@ using OpenIddict;
 using NWebsec.AspNetCore.Middleware;
 using CryptoHelper;
 
+// https://medium.com/@blacksonic86/angular-2-authentication-revisited-611bf7373bf9#.yum2vp6ok
+
 namespace AngularAuth
 {
     public class Startup

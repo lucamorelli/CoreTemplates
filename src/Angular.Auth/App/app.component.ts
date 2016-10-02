@@ -1,16 +1,19 @@
 ﻿import { Component } from '@angular/core';
+import { UserService } from './user.service';
+
 @Component({
     selector: 'my-app',
-    template: `
-   <h1>{{title}}</h1>
-   <nav>
-     <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-     <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
-   </nav>
-   <router-outlet></router-outlet>
-  `,
+    templateUrl: './views/app.component.html',
     styleUrls: ['./views/app.component.css']
 })
 export class AppComponent {
     title = 'Tour of Heroes';
+    displayName: string;
+
+    constructor(
+        private userService: UserService) { }
+
+    get isAuthenticated(): boolean {
+        return this.userService.isLoggedIn();
+    }
 }
