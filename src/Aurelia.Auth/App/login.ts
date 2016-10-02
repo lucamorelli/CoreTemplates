@@ -1,50 +1,41 @@
 ﻿import { AuthService } from 'aurelia-authentication';
-import { autoinject, computedFrom } from 'aurelia-framework';
+import { autoinject } from 'aurelia-dependency-injection';
+import { EventAggregator } from 'aurelia-event-aggregator';
 
 @autoinject
 export class Login {
-    providers: any = [];
+    username: string;
+    password: string;
+    heading: string = 'Login';
 
-    constructor(private authService: AuthService) {
-        this.authService = authService;
+    constructor(private auth: AuthService, private eventAggregator: EventAggregator) {
     };
-
-    heading = 'Login';
-
-    email = '';
-    password = '';
-
-    // make a getter to get the authentication status.
-    // use computedFrom to avoid dirty checking
-    @computedFrom('authService.authenticated')
-    get authenticated() {
-        return this.authService.authenticated;
-    }
 
     login() {
-        return this.authService.login(this.email, this.password)
+        let loginOptions = {
+            username: this.username,
+            password: this.password,
+            grant_type: 'password',
+            scope: 'openid profile email roles'
+        };
+        return this.auth.login(loginOptions)
             .then(response => {
                 console.log("success logged " + response);
+                this.eventAggregator.publish('authChanged');
             })
             .catch(err => {
-                console.log("login failure");
+                err.json().then(function (e) {
+                    alert(e.message);
+                    console.log("login failure : " + e.message);
+                });
+
             });
     };
 
-    // use authService.logout to delete stored tokens
-    // if you are using JWTs, authService.logout() will be called automatically,
-    // when the token expires. The expiredRedirect setting in your authConfig
-    // will determine the redirection option
-    logout() {
-        return this.authService.logout();
-    }
-
-    // use authenticate(providerName) to get third-party authentication
     authenticate(name) {
-        return this.authService.authenticate(name)
-            .then(response => {
-                this.providers[name] = true;
-                console.log("auth response " + response);
+        return this.auth.authenticate(name, false, null)
+            .then((response) => {
             });
+
     }
 }

@@ -1,0 +1,30 @@
+﻿<template>
+    <div class="container">
+        <div class="row">
+            <div class="center-form panel col-md-6">
+                <div class="panel-body">
+                    <h2 class="text-center">Sign Up</h2>
+                    <form method="post" name="loginForm">
+                        <div class="form-group has-feedback">
+                            <input class="form-control input-lg" type="email" name="username" value.bind="username" placeholder="Email Address" required autofocus>
+                            <span class="ion-at form-control-feedback"></span>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <input class="form-control input-lg" type="password" name="password" value.bind="password" placeholder="Password" required>
+                            <span class="ion-key form-control-feedback"></span>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <input class="form-control input-lg" type="password" name="repeatPassword" value.bind="repeatPassword" placeholder="Repeat Password" required>
+                            <span class="ion-key form-control-feedback"></span>
+                        </div>
+                        <button type="submit" click.delegate="signup()" class="btn btn-lg  btn-block btn-success">Signup</button>
+                        <br />
+                        <p class="text-center">
+                            <a href="#">Forgot your password?</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

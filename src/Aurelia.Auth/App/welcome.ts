@@ -11,8 +11,6 @@ export class Welcome {
 
   constructor(private authService: AuthService) {
       this.authService = authService;
-
-      alert(this.authService.authenticated);
   };
 
   // Getters can't be directly observed, so they must be dirty checked.

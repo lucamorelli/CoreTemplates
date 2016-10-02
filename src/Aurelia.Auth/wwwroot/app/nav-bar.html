@@ -20,6 +20,16 @@
         </li>
       </ul>
 
+
+    <ul class="nav navbar-nav navbar-right" if.bind="!isAuthenticated">
+        <li><a href="/Login">Login</a></li>
+        <li><a href="/signup">Sign up</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right" if.bind="isAuthenticated">
+        <li><a href="/profile">Welcome ${displayName}</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+
       <ul class="nav navbar-nav navbar-right">
         <li class="loader" if.bind="router.isNavigating">
           <i class="fa fa-spinner fa-spin fa-2x"></i>

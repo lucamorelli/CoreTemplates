@@ -8,16 +8,16 @@ export function configure(aurelia: Aurelia) {
       .developmentLogging()
       /* setup the api endpoints first (if desired) */
       .plugin('aurelia-api', configure => {
-          configure
-              .registerEndpoint('auth', 'https://myapi.org/auth')
-              .registerEndpoint('protected-api', 'https://myapi.org/protected-api')
-              .registerEndpoint('public-api', 'http://myapi.org/public-api')
-              .setDefaultEndpoint('auth');
+          configure.registerEndpoint('connect', 'connect', { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
+              //configure
+              //    .registerEndpoint('auth', 'https://myapi.org/auth')
+              .registerEndpoint('protected-api', 'https://myapi.org/protected-api');
+          //    .registerEndpoint('public-api', 'http://myapi.org/public-api')
+          //    .setDefaultEndpoint('auth');
       })
       /* configure aurelia-authentication */
       .plugin('aurelia-authentication', baseConfig => {
           baseConfig.configure(authConfig);
-          alert('eccolo');
       });
 
   // Uncomment the line below to enable animation.

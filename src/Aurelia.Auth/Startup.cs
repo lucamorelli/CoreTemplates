@@ -81,6 +81,7 @@ namespace AureliaAuth
                 // the other flows if you need to support implicit, password or client credentials.
                 .AllowAuthorizationCodeFlow()
                 .AllowRefreshTokenFlow()
+                .AllowPasswordFlow()
 
                 // During development, you can disable the HTTPS requirement.
                 .DisableHttpsRequirement()

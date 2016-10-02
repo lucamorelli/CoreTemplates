@@ -8,15 +8,16 @@ export class Users {
   public users = [];
 
   constructor(private http: HttpClient) {
-    http.configure(config => {
-      config
-        .useStandardConfiguration()
-        .withBaseUrl('https://api.github.com/');
-    });
+    //http.configure(config => {
+    //  config
+    //    .useStandardConfiguration()
+    //    .withBaseUrl('https://api.github.com/');
+    //});
   }
 
   public activate() {
-    return this.http.fetch('users')
+      return this.http.fetch('https://api.github.com/users')
+    //return this.http.fetch('users')
       .then(response => response.json())
       .then(users => this.users = users);
   }

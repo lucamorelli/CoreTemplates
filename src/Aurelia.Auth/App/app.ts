@@ -19,6 +19,9 @@ export class App {
       { route: ['', 'welcome'], name: 'welcome', moduleId: 'welcome', nav: true, title: 'Welcome' },
       { route: 'users', name: 'users', moduleId: 'users', nav: true, title: 'Github Users', auth: true },
       { route: 'child-router', name: 'child-router', moduleId: 'child-router', nav: true, title: 'Child Router' },
+      { route: 'login', moduleId: './login', nav: false, title: 'Login', name: 'login' },
+      { route: 'logout', moduleId: './logout', nav: false, title: 'Logout', name: 'logout' },
+      { route: 'signup', moduleId: './signup', nav: false, title: 'Signup', name: 'signup' }
     ]);
 
     this.router = router;
