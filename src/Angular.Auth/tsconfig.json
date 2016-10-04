@@ -8,7 +8,7 @@
     "moduleResolution": "node",
     "noEmitOnError": true,
     "noImplicitAny": false,
-    "outDir": "wwwroot/app/",
+    "outDir": "wwwroot/",
     "removeComments": false,
     "target": "es5",
     "sourceRoot": "app",

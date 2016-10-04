@@ -8,12 +8,8 @@ import { UserService } from './user.service';
 })
 export class AppComponent {
     title = 'Tour of Heroes';
-    displayName: string;
+    
 
     constructor(
         private userService: UserService) { }
-
-    get isAuthenticated(): boolean {
-        return this.userService.isLoggedIn();
-    }
 }

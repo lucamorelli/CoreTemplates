@@ -7,9 +7,9 @@ namespace AngularAuth.ViewModels.Register
 {
     public class JwtRegisterViewModel
     {
-        public string userId { get; set; }
+        public string email { get; set; }
+        public string userName { get; set; }
         public string password { get; set; }
-        public string repeatPassword { get; set; }
-
+        public string scope { get; set; }
     }
 }

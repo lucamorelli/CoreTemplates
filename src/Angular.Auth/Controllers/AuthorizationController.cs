@@ -18,6 +18,7 @@ using AngularAuth.ViewModels.Authorization;
 using AngularAuth.ViewModels.Shared;
 using OpenIddict;
 using AngularAuth.Models;
+using AngularAuth.ViewModels.Register;
 
 namespace AngularAuth.Server {
     public class AuthorizationController : Controller {
@@ -181,9 +182,7 @@ namespace AngularAuth.Server {
                     await _userManager.ResetAccessFailedCountAsync(user);
                 }
 
-
                 var identity = await _userManager.CreateIdentityAsync(user, request.GetScopes());
-
 
                 // Create a new authentication ticket holding the user identity. 
                 var ticket = new AuthenticationTicket(
@@ -206,6 +205,45 @@ namespace AngularAuth.Server {
             });
         }
 
+        [AllowAnonymous]
+        [HttpPost("~/connect/signup")]
+        [Produces("application/json")]
+        public async Task<IActionResult> SignUp([FromBody]JwtRegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.userName, Email = model.email };
+                var result = await _userManager.CreateAsync(user, model.password);
+                if (result.Succeeded)
+                {
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
+                    // Send an email with this link
+                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                    //await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
+                    //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
+                    // Create a new authentication ticket holding the user identity. 
+                    var scopes = model.scope.Split(' ');
+                    var resources = new string[0];
+                    var identity = await _userManager.CreateIdentityAsync(user,scopes);
+
+                    var ticket = new AuthenticationTicket(
+                        new ClaimsPrincipal(identity),
+                        new AuthenticationProperties(),
+                       OpenIdConnectServerDefaults.AuthenticationScheme);
+
+                    ticket.SetResources(resources);
+                    ticket.SetScopes(scopes);
+
+                    return SignIn(ticket.Principal, ticket.Properties, ticket.AuthenticationScheme);
+                }
+                else
+                    return Ok(false);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return Ok(false);
+        }
 
     }
 }

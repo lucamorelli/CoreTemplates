@@ -4,6 +4,7 @@ import { HeroDetailComponent } from './hero-detail.component';
 import { HeroService } from './hero.service';
 import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthHttp } from 'angular2-jwt/angular2-jwt';
 
 @Component({
     selector: 'my-heroes',
@@ -17,10 +18,12 @@ export class HeroesComponent implements OnInit {
     heroes : Hero[];
 
     title = 'Tour of Heroes';
+    data: any;
 
     constructor(
         private router: Router,
-        private heroService: HeroService) { }
+        private heroService: HeroService,
+        public authHttp: AuthHttp) { }
 
     onSelect(hero: Hero): void {
         this.selectedHero = hero;
@@ -32,6 +35,17 @@ export class HeroesComponent implements OnInit {
 
     ngOnInit(): void {
         this.getHeroes();
+
+        this.authHttp.get('Resource/GetMessage')
+            .map(res => res.json())
+            .subscribe(
+            data =>
+                this.data = data,
+            err =>
+                console.log(err),
+            () =>
+                console.log('Request Complete')
+            );
     }
     
     gotoDetail(): void {

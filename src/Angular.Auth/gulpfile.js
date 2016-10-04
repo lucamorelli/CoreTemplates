@@ -56,9 +56,15 @@ gulp.task("copy-deps:jquery", function () {
          .pipe(gulp.dest(paths.npmLibs + '/jquery/'));
 });
 
+gulp.task("copy-deps:angular2-jwt", function () {
+    return gulp.src(paths.npmSrc + '/angular2-jwt/**/*.{js,map}', { base: paths.npmSrc + '/angular2-jwt/' })
+         .pipe(gulp.dest(paths.npmLibs + '/angular2-jwt/'));
+});
+
 gulp.task("clean-deps", function () {
     return del([paths.npmLibs + '/**/**']);;
 });
 
 gulp.task("copy-deps", ['copy-deps:@angular', 'copy-deps:core-js', 'copy-deps:reflect-metadata',
-    'copy-deps:rxjs', 'copy-deps:systemjs', 'copy-deps:zone.js', 'copy-deps:bootstrap', 'copy-deps:jquery' ]);
+    'copy-deps:rxjs', 'copy-deps:systemjs', 'copy-deps:zone.js', 'copy-deps:bootstrap', 'copy-deps:jquery',
+    'copy-deps:angular2-jwt']);
