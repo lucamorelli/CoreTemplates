@@ -26,7 +26,7 @@ export class LoginComponent {
             (data) => {
                 if (data != undefined) { 
                     alert('login effettuato con success');
-                    this.router.navigate(['']);
+//                    this.router.navigate(['/dashboard']);
                 }
             },
             err => alert(err)

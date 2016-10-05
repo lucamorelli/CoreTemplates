@@ -16,7 +16,7 @@ export class UserService {
         this.loggedIn = !!localStorage.getItem('auth_token');
     }
 
-    login(email: string , password: string) {
+    login(email: string , password: string) { 
 
         var jsonData = "grant_type=password&scope=openid profile email roles&username=" + email + "&password=" + password;
 
@@ -26,7 +26,7 @@ export class UserService {
             .map(res => {
                 if (res != undefined) {
 //                    localStorage.setItem('auth_token', res.auth_token);
-                    localStorage.setItem('id_token', res.auth_token);
+                    localStorage.setItem('id_token', res.id_token /*res.auth_token*/);
                     this.loggedIn = true;
                 }
 

@@ -36,7 +36,7 @@ export class HeroesComponent implements OnInit {
     ngOnInit(): void {
         this.getHeroes();
 
-        this.authHttp.get('Resource/GetMessage')
+        this.authHttp.get('api/message')
             .map(res => res.json())
             .subscribe(
             data =>
