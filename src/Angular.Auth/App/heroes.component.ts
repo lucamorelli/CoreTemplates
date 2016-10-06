@@ -4,7 +4,7 @@ import { HeroDetailComponent } from './hero-detail.component';
 import { HeroService } from './hero.service';
 import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthHttp } from 'angular2-jwt/angular2-jwt';
+import { Headers, Http, RequestOptions } from '@angular/http';
 
 @Component({
     selector: 'my-heroes',
@@ -23,7 +23,7 @@ export class HeroesComponent implements OnInit {
     constructor(
         private router: Router,
         private heroService: HeroService,
-        public authHttp: AuthHttp) { }
+        public http: Http) { }
 
     onSelect(hero: Hero): void {
         this.selectedHero = hero;
@@ -36,7 +36,13 @@ export class HeroesComponent implements OnInit {
     ngOnInit(): void {
         this.getHeroes();
 
-        this.authHttp.get('api/message')
+        var authHeader = new Headers();
+        var token = localStorage.getItem('access_token');
+        authHeader.append('Authorization', 'Bearer ' + token); 
+        var jwtOptions = new RequestOptions({ headers: authHeader });
+
+
+        this.http.get('api/message', jwtOptions)
             .map(res => res.json())
             .subscribe(
             data =>

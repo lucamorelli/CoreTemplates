@@ -5,9 +5,12 @@ import { UserService } from './user.service';
 
 @Injectable()
 export class LoggedInGuard implements CanActivate {
-    constructor(private user: UserService) { }
+    constructor(private user: UserService, private router: Router) { }
 
     canActivate() {
-        return this.user.isLoggedIn();
+        if (this.user.isLoggedIn())
+            return this.user.isLoggedIn();
+        else
+            this.router.navigate(['/login']);
     }
 }

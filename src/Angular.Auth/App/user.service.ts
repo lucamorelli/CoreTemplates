@@ -1,6 +1,5 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { AuthHttp } from 'angular2-jwt/angular2-jwt';
 import 'rxjs/Rx';
 
 @Injectable()
@@ -12,7 +11,7 @@ export class UserService {
     private formHeaders = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
     private formOptions = new RequestOptions({ headers: this.formHeaders });
 
-    constructor(private http: Http, private authHttp: AuthHttp) {
+    constructor(private http: Http) {
         this.loggedIn = !!localStorage.getItem('auth_token');
     }
 
@@ -25,8 +24,8 @@ export class UserService {
             .map( res => res.json() )
             .map(res => {
                 if (res != undefined) {
-//                    localStorage.setItem('auth_token', res.auth_token);
                     localStorage.setItem('id_token', res.id_token /*res.auth_token*/);
+                    localStorage.setItem('access_token', res.access_token);
                     this.loggedIn = true;
                 }
 
@@ -36,8 +35,7 @@ export class UserService {
 
 
     logout() {
-      //  this.authHttp.post('connect/logout');
-        localStorage.removeItem('auth_token');
+        localStorage.removeItem('access_token');
         this.loggedIn = false;
     }
 

@@ -73,14 +73,14 @@ namespace AngularAuth
                 .AddMvcBinders()
 
                 // Enable the authorization, logout, token and userinfo endpoints.
-                .EnableAuthorizationEndpoint("/connect/authorize")
+                //.EnableAuthorizationEndpoint("/connect/authorize")
                 .EnableLogoutEndpoint("/connect/logout")
                 .EnableTokenEndpoint("/connect/token")
                 .EnableUserinfoEndpoint("/connect/userinfo")
 
                 // Note: the Mvc.Client sample only uses the authorization code flow but you can enable
                 // the other flows if you need to support implicit, password or client credentials.
-                .AllowAuthorizationCodeFlow()
+                //.AllowAuthorizationCodeFlow()
                 .AllowRefreshTokenFlow()
                 .AllowPasswordFlow()
 
@@ -119,7 +119,8 @@ namespace AngularAuth
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddConsole(LogLevel.Debug);
             loggerFactory.AddDebug();
 
             app.UseDefaultFiles(new DefaultFilesOptions
@@ -131,7 +132,6 @@ namespace AngularAuth
 
             // Add a middleware used to validate access
             // tokens and protect the API endpoints.
-            app.UseOAuthValidation();
 
             // Alternatively, you can also use the introspection middleware.
             // Using it is recommended if your resource server is in a
@@ -146,33 +146,34 @@ namespace AngularAuth
             //     options.ClientSecret = "875sqd4s5d748z78z7ds1ff8zz8814ff88ed8ea4z4zzd";
             // });
 
-            app.UseCsp(options => options.DefaultSources(directive => directive.Self())
-                .ImageSources(directive => directive.Self()
-                    .CustomSources("*"))
-                .ScriptSources(directive => directive.Self()
-                    .UnsafeInline())
-                .StyleSources(directive => directive.Self()
-                    .UnsafeInline()));
+            //app.UseCsp(options => options.DefaultSources(directive => directive.Self())
+            //    .ImageSources(directive => directive.Self()
+            //        .CustomSources("*"))
+            //    .ScriptSources(directive => directive.Self()
+            //        .UnsafeInline())
+            //    .StyleSources(directive => directive.Self()
+            //        .UnsafeInline()));
 
-            app.UseXContentTypeOptions();
+            //app.UseXContentTypeOptions();
 
-            app.UseXfo(options => options.Deny());
+            //app.UseXfo(options => options.Deny());
 
-            app.UseXXssProtection(options => options.EnabledWithBlockMode());
+            //app.UseXXssProtection(options => options.EnabledWithBlockMode());
 
             app.UseIdentity();
+            app.UseOAuthValidation();
 
-            app.UseGoogleAuthentication(new GoogleOptions
-            {
-                ClientId = "560027070069-37ldt4kfuohhu3m495hk2j4pjp92d382.apps.googleusercontent.com",
-                ClientSecret = "n2Q-GEw9RQjzcRbU3qhfTj8f"
-            });
+            //app.UseGoogleAuthentication(new GoogleOptions
+            //{
+            //    ClientId = "560027070069-37ldt4kfuohhu3m495hk2j4pjp92d382.apps.googleusercontent.com",
+            //    ClientSecret = "n2Q-GEw9RQjzcRbU3qhfTj8f"
+            //});
 
-            app.UseTwitterAuthentication(new TwitterOptions
-            {
-                ConsumerKey = "6XaCTaLbMqfj6ww3zvZ5g",
-                ConsumerSecret = "Il2eFzGIrYhz6BWjYhVXBPQSfZuS4xoHpSSyD9PI"
-            });
+            //app.UseTwitterAuthentication(new TwitterOptions
+            //{
+            //    ConsumerKey = "6XaCTaLbMqfj6ww3zvZ5g",
+            //    ConsumerSecret = "Il2eFzGIrYhz6BWjYhVXBPQSfZuS4xoHpSSyD9PI"
+            //});
 
             app.UseStatusCodePagesWithReExecute("/error");
 
@@ -188,128 +189,14 @@ namespace AngularAuth
             //            app.UseMvcWithDefaultRoute();
             app.UseMvc(routes =>
             {
-                //routes.MapRoute("default",
-                //                "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute("default",
+                                "{controller=Home}/{action=Index}/{id?}");
                 routes.MapRoute("spa-fallback",
                                 "{*anything}",
                                 new { controller = "Home", action = "Index" });
             });
 
 
-            using (var context = new ApplicationDbContext(
-                app.ApplicationServices.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
-            {
-                context.Database.EnsureCreated();
-
-                // Add Mvc.Client to the known applications.
-                if (!context.Applications.Any())
-                {
-                    // Note: when using the introspection middleware, your resource server
-                    // MUST be registered as an OAuth2 client and have valid credentials.
-                    // 
-                    // context.Applications.Add(new OpenIddictApplication {
-                    //     Id = "resource_server",
-                    //     DisplayName = "Main resource server",
-                    //     Secret = Crypto.HashPassword("secret_secret_secret"),
-                    //     Type = OpenIddictConstants.ClientTypes.Confidential
-                    // });
-
-                    context.Applications.Add(new OpenIddictApplication<Guid>
-                    {
-                        ClientId = "myClient",
-                        ClientSecret = Crypto.HashPassword("secret_secret_secret"),
-                        DisplayName = "My client application",
-                        LogoutRedirectUri = "http://localhost:53507/",
-                        RedirectUri = "http://localhost:53507/signin-oidc",
-                        Type = OpenIddictConstants.ClientTypes.Confidential
-                    });
-
-                    // To test this sample with Postman, use the following settings:
-                    // 
-                    // * Authorization URL: http://localhost:54540/connect/authorize
-                    // * Access token URL: http://localhost:54540/connect/token
-                    // * Client ID: postman
-                    // * Client secret: [blank] (not used with public clients)
-                    // * Scope: openid email profile roles
-                    // * Grant type: authorization code
-                    // * Request access token locally: yes
-                    context.Applications.Add(new OpenIddictApplication<Guid>
-                    {
-                        ClientId = "postman",
-                        DisplayName = "Postman",
-                        RedirectUri = "https://www.getpostman.com/oauth2/callback",
-                        Type = OpenIddictConstants.ClientTypes.Public
-                    });
-
-                    context.Applications.Add(new OpenIddictApplication<Guid>
-                    {
-                        ClientId = "Aurelia.OpenIdConnect",
-                        DisplayName = "Aurelia Open Id Connect",
-                        LogoutRedirectUri = "http://localhost:5000/signout-oidc",
-                        RedirectUri = "http://localhost:5000/signin-oidc",
-                        Type = OpenIddictConstants.ClientTypes.Public
-                    });
-
-                    context.Applications.Add(new OpenIddictApplication<Guid>
-                    {
-                        ClientId = "ResourceServer01",
-                        ClientSecret = Crypto.HashPassword("secret_secret_secret"),
-                        Type = OpenIddictConstants.ClientTypes.Confidential
-                    });
-
-                    context.Applications.Add(new OpenIddictApplication<Guid>
-                    {
-                        ClientId = "ResourceServer02",
-                        ClientSecret = Crypto.HashPassword("secret_secret_secret"),
-                        Type = OpenIddictConstants.ClientTypes.Confidential
-                    });
-
-
-                    context.SaveChanges();
-                }
-            }
         }
-
-        private void SeedDatabase(IApplicationBuilder app)
-        {
-            var options = app
-                .ApplicationServices
-                .GetRequiredService<DbContextOptions<ApplicationDbContext>>();
-
-            using (var context = new ApplicationDbContext(options))
-            {
-                context.Database.EnsureDeleted();
-                context.Database.EnsureCreated();
-
-                if (!context.Applications.Any())
-                {
-                    context.Applications.Add(new OpenIddictApplication<Guid>
-                    {
-                        ClientId = "Aurelia.OpenIdConnect",
-                        DisplayName = "Aurelia Open Id Connect",
-                        LogoutRedirectUri = "http://localhost:5000/signout-oidc",
-                        RedirectUri = "http://localhost:5000/signin-oidc",
-                        Type = OpenIddictConstants.ClientTypes.Public
-                    });
-
-                    context.Applications.Add(new OpenIddictApplication<Guid>
-                    {
-                        ClientId = "ResourceServer01",
-                        ClientSecret = Crypto.HashPassword("secret_secret_secret"),
-                        Type = OpenIddictConstants.ClientTypes.Confidential
-                    });
-
-                    context.Applications.Add(new OpenIddictApplication<Guid>
-                    {
-                        ClientId = "ResourceServer02",
-                        ClientSecret = Crypto.HashPassword("secret_secret_secret"),
-                        Type = OpenIddictConstants.ClientTypes.Confidential
-                    });
-                }
-
-                context.SaveChanges();
-            }
-        }
-
     }
 }
