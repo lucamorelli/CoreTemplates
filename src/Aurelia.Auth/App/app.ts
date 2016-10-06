@@ -1,10 +1,14 @@
 import { Router, RouterConfiguration } from 'aurelia-router';
 import { autoinject } from "aurelia-framework";
-import { AuthenticateStep } from 'aurelia-authentication';
+import { AuthenticateStep, FetchConfig } from 'aurelia-authentication';
 
 @autoinject
 export class App {
   public router: Router;
+
+  constructor(private fetchConfig: FetchConfig) {
+      this.fetchConfig = fetchConfig;
+  }
 
   public configureRouter(config: RouterConfiguration, router: Router) {
 
@@ -25,5 +29,10 @@ export class App {
     ]);
 
     this.router = router;
+  }
+
+  activate() {
+      // this will add the interceptor for the Authorization header to the HttpClient singleton
+      this.fetchConfig.configure();
   }
 }

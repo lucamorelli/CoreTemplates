@@ -9,11 +9,8 @@ export function configure(aurelia: Aurelia) {
       /* setup the api endpoints first (if desired) */
       .plugin('aurelia-api', configure => {
           configure.registerEndpoint('connect', 'connect', { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
-              //configure
               //    .registerEndpoint('auth', 'https://myapi.org/auth')
-              .registerEndpoint('protected-api', 'https://myapi.org/protected-api');
-          //    .registerEndpoint('public-api', 'http://myapi.org/public-api')
-          //    .setDefaultEndpoint('auth');
+              .registerEndpoint('protected-api', 'api');
       })
       /* configure aurelia-authentication */
       .plugin('aurelia-authentication', baseConfig => {
