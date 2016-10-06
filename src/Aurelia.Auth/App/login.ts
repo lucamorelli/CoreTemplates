@@ -1,6 +1,7 @@
 ﻿import { AuthService } from 'aurelia-authentication';
 import { autoinject } from 'aurelia-dependency-injection';
 import { EventAggregator } from 'aurelia-event-aggregator';
+import { Router } from 'aurelia-router';
 
 @autoinject
 export class Login {
@@ -8,7 +9,7 @@ export class Login {
     password: string;
     heading: string = 'Login';
 
-    constructor(private auth: AuthService, private eventAggregator: EventAggregator) {
+    constructor(private auth: AuthService, private eventAggregator: EventAggregator, private router: Router) {
     };
 
     login() {
@@ -21,7 +22,8 @@ export class Login {
         return this.auth.login(loginOptions)
             .then(response => {
                 console.log("success logged " + response);
-                this.eventAggregator.publish('authChanged');
+                //                this.eventAggregator.publish('authChanged');
+                this.router.navigate('/');
             })
             .catch(err => {
                 err.json().then(function (e) {
