@@ -1,4 +1,4 @@
-// import {computedFrom} from 'aurelia-framework';
+import {computedFrom} from 'aurelia-framework';
 import { AuthService } from 'aurelia-authentication';
 import { autoinject, inject } from 'aurelia-framework';
 import { HttpClient} from 'aurelia-fetch-client';
@@ -12,7 +12,7 @@ export class Welcome {
 
   constructor(private authService: AuthService, private httpClient: HttpClient) {
 
-      httpClient.fetch('/api/message'{
+      httpClient.fetch('/api/message', {
           method: 'get',
           //body: JSON.stringify(auth),
           headers: {

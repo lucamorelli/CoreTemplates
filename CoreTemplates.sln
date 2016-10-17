@@ -20,6 +20,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Aurelia.Auth", "src\Aurelia
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Angular.Auth", "src\Angular.Auth\Angular.Auth.xproj", "{30D76DBC-EF0B-4BB3-8209-D7AEF7D4726D}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Angular.WebPack", "src\Angular.WebPack\Angular.WebPack.xproj", "{4199E133-EA63-4F1A-BC76-3EEDB8E457B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +44,10 @@ Global
 		{30D76DBC-EF0B-4BB3-8209-D7AEF7D4726D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30D76DBC-EF0B-4BB3-8209-D7AEF7D4726D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30D76DBC-EF0B-4BB3-8209-D7AEF7D4726D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4199E133-EA63-4F1A-BC76-3EEDB8E457B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4199E133-EA63-4F1A-BC76-3EEDB8E457B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4199E133-EA63-4F1A-BC76-3EEDB8E457B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4199E133-EA63-4F1A-BC76-3EEDB8E457B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,5 +57,6 @@ Global
 		{F1FA08BC-40D3-4060-B495-471B4C692FFE} = {59070090-C342-4444-99D2-C8AA89084B63}
 		{EC055356-1193-44CB-94B6-88AF17EC2117} = {59070090-C342-4444-99D2-C8AA89084B63}
 		{30D76DBC-EF0B-4BB3-8209-D7AEF7D4726D} = {59070090-C342-4444-99D2-C8AA89084B63}
+		{4199E133-EA63-4F1A-BC76-3EEDB8E457B4} = {59070090-C342-4444-99D2-C8AA89084B63}
 	EndGlobalSection
 EndGlobal
