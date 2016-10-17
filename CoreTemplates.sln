@@ -8,7 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F482587A-E438-4157-9289-F31CF2B66188}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
-		E:\Downloads\openiddict-samples-master\NuGet.config = E:\Downloads\openiddict-samples-master\NuGet.config
+		NuGet.config = NuGet.config
 		todo.txt = todo.txt
 	EndProjectSection
 EndProject
