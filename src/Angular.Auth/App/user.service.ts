@@ -1,18 +1,20 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/Rx';
+import { RequestOptionsServices } from './request-options.services';
+
 
 @Injectable()
 export class UserService {
     private loggedIn = false;
-    private jsonHeaders = new Headers({ 'Content-Type': 'application/json' });
-    private jsonOptions = new RequestOptions({ headers: this.jsonHeaders });
+    //private jsonHeaders = new Headers({ 'Content-Type': 'application/json' });
+    //private jsonOptions = new RequestOptions({ headers: this.jsonHeaders });
 
-    private formHeaders = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-    private formOptions = new RequestOptions({ headers: this.formHeaders });
+    //private formHeaders = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    //private formOptions = new RequestOptions({ headers: this.formHeaders });
 
-    constructor(private http: Http) {
-        this.loggedIn = !!localStorage.getItem('auth_token');
+    constructor(private http: Http, private requestOptions: RequestOptionsServices) {
+        this.loggedIn = !!localStorage.getItem('access_token');
     }
 
     login(email: string , password: string) { 
@@ -20,11 +22,10 @@ export class UserService {
         var jsonData = "grant_type=password&scope=openid profile email roles&username=" + email + "&password=" + password;
 
         return this.http
-            .post('connect/token', jsonData, this.formOptions)
+            .post('connect/token', jsonData, this.requestOptions.form)
             .map( res => res.json() )
             .map(res => {
                 if (res != undefined) {
-                    localStorage.setItem('id_token', res.id_token /*res.auth_token*/);
                     localStorage.setItem('access_token', res.access_token);
                     this.loggedIn = true;
                 }
@@ -54,7 +55,7 @@ export class UserService {
         var jsonData = JSON.stringify(model);
 
         return this.http
-            .post('register/signup', jsonData, this.jsonOptions)
+            .post('connect/signup', jsonData, this.requestOptions.json)
             .map(res => res.json())
     }
 }

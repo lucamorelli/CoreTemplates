@@ -19,6 +19,7 @@ import { UserService } from './user.service';
 import { HeroService } from './hero.service';
 import { AuthHttp } from 'angular2-jwt/angular2-jwt';
 import { AuthConfig } from 'angular2-jwt/angular2-jwt';
+import { RequestOptionsServices } from './request-options.services';
 
 
 export function getAuthHttp(http) {
@@ -45,6 +46,7 @@ export function getAuthHttp(http) {
     providers: [
         HeroService,
         UserService,
+        RequestOptionsServices,
         LoggedInGuard,
         {
             provide: AuthHttp,

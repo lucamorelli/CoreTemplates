@@ -5,6 +5,7 @@ import { HeroService } from './hero.service';
 import { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Headers, Http, RequestOptions } from '@angular/http';
+import { RequestOptionsServices } from './request-options.services';
 
 @Component({
     selector: 'my-heroes',
@@ -23,7 +24,8 @@ export class HeroesComponent implements OnInit {
     constructor(
         private router: Router,
         private heroService: HeroService,
-        public http: Http) { }
+        public http: Http,
+        private requestOptions: RequestOptionsServices) { }
 
     onSelect(hero: Hero): void {
         this.selectedHero = hero;
@@ -36,13 +38,8 @@ export class HeroesComponent implements OnInit {
     ngOnInit(): void {
         this.getHeroes();
 
-        var authHeader = new Headers();
-        var token = localStorage.getItem('access_token');
-        authHeader.append('Authorization', 'Bearer ' + token); 
-        var jwtOptions = new RequestOptions({ headers: authHeader });
 
-
-        this.http.get('api/message', jwtOptions)
+        this.http.get('api/message', this.requestOptions.jwt)
             .map(res => res.json())
             .subscribe(
             data =>
