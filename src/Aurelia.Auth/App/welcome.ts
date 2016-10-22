@@ -1,7 +1,9 @@
-import {computedFrom} from 'aurelia-framework';
-import { AuthService } from 'aurelia-authentication';
-import { autoinject, inject } from 'aurelia-framework';
-import { HttpClient} from 'aurelia-fetch-client';
+import { computedFrom } from 'aurelia-framework';
+import { AuthService, FetchConfig } from 'aurelia-authentication';
+import { autoinject } from 'aurelia-framework';
+import { HttpClient } from 'aurelia-fetch-client';
+import { Endpoint } from 'aurelia-api';
+
 
 @autoinject
 export class Welcome {
@@ -10,23 +12,39 @@ export class Welcome {
   public lastName = 'Doe';
   private previousValue = this.fullName;
 
-  constructor(private authService: AuthService, private httpClient: HttpClient) {
+  constructor(private authService: AuthService, private httpClient: HttpClient, private fetchConfig: FetchConfig) {
 
-      httpClient.fetch('/api/message', {
-          method: 'get',
-          //body: JSON.stringify(auth),
-          headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-          }
-      })
-          .then((response: Response) =>{
+      if (authService.authenticated) {
+          var client: any = this.fetchConfig.configure(new HttpClient());
+
+          client.fetch('/api/message', {
+              method: 'get',
+              //body: JSON.stringify(auth),
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
+              }
+          })
+          .then((response: Response) => {
               if (response.ok) {
                   response.text().then(testo => {
                       alert(testo);
                   });
-            }
+              }
           });
+       }
+      //if (authService.authenticated) {
+      //    apiEndPoint.find('/message')
+      //    .then((response: Response) =>{
+      //        if (response.ok) {
+      //            response.text().then(testo => {
+      //                alert(testo);
+      //            });
+      //      }
+      //        })
+      //        .catch(console.error);
+
+      //}
   };
 
   // Getters can't be directly observed, so they must be dirty checked.
