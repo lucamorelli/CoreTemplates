@@ -7,7 +7,7 @@
 using AspNet.Security.OpenIdConnect.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
-using Mvc.Server.ViewModels.Shared;
+using AureliaAuth.ViewModels.Shared;
 
 namespace AureliaAuth.Server {
     public class ErrorController : Controller {

@@ -35,7 +35,7 @@ export class Login {
     };
 
     authenticate(name) {
-        return this.auth.authenticate(name, false, null)
+        return this.auth.authenticate(name)
             .then((response) => {
             });
 

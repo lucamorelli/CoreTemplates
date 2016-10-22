@@ -15,20 +15,23 @@ using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Mvc.Server.ViewModels.Authorization;
-using Mvc.Server.ViewModels.Shared;
+using AureliaAuth.ViewModels.Shared;
 using OpenIddict;
 using AureliaAuth.Models;
+using System.Linq;
+using AureliaAuth.ViewModels.Register;
+using System.Collections.Generic;
 
 namespace AureliaAuth.Server {
     public class AuthorizationController : Controller {
         private readonly OpenIddictApplicationManager<OpenIddictApplication<Guid>> _applicationManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly OpenIddictUserManager<ApplicationUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public AuthorizationController(
             OpenIddictApplicationManager<OpenIddictApplication<Guid>> applicationManager,
             SignInManager<ApplicationUser> signInManager,
-            OpenIddictUserManager<ApplicationUser> userManager) {
+            UserManager<ApplicationUser> userManager) {
             _applicationManager = applicationManager;
             _signInManager = signInManager;
             _userManager = userManager;
@@ -38,8 +41,10 @@ namespace AureliaAuth.Server {
         public async Task<IActionResult> Authorize(OpenIdConnectRequest request) {
             // Retrieve the application details from the database.
             var application = await _applicationManager.FindByClientIdAsync(request.ClientId);
-            if (application == null) {
-                return View("Error", new ErrorViewModel {
+            if (application == null)
+            {
+                return View("Error", new ErrorViewModel
+                {
                     Error = OpenIdConnectConstants.Errors.InvalidClient,
                     ErrorDescription = "Details concerning the calling client application cannot be found in the database"
                 });
@@ -47,7 +52,8 @@ namespace AureliaAuth.Server {
 
             // Flow the request_id to allow OpenIddict to restore
             // the original authorization request from the cache.
-            return View(new AuthorizeViewModel {
+            return View(new AuthorizeViewModel
+            {
                 ApplicationName = application.DisplayName,
                 RequestId = request.RequestId,
                 Scope = request.Scope
@@ -58,25 +64,17 @@ namespace AureliaAuth.Server {
         public async Task<IActionResult> Accept(OpenIdConnectRequest request) {
             // Retrieve the profile of the logged in user.
             var user = await _userManager.GetUserAsync(User);
-            if (user == null) {
-                return View("Error", new ErrorViewModel {
+            if (user == null)
+            {
+                return View("Error", new ErrorViewModel
+                {
                     Error = OpenIdConnectConstants.Errors.ServerError,
                     ErrorDescription = "An internal error has occurred"
                 });
             }
 
-            // Create a new ClaimsIdentity containing the claims that
-            // will be used to create an id_token, a token or a code.
-            var identity = await _userManager.CreateIdentityAsync(user, request.GetScopes());
-
-            // Create a new authentication ticket holding the user identity.
-            var ticket = new AuthenticationTicket(
-                new ClaimsPrincipal(identity),
-                new AuthenticationProperties(),
-                OpenIdConnectServerDefaults.AuthenticationScheme);
-
-            ticket.SetResources(request.GetResources());
-            ticket.SetScopes(request.GetScopes());
+            // Create a new authentication ticket.
+            var ticket = await CreateTicketAsync(request.GetScopes(), user);
 
             // Returning a SignInResult will ask OpenIddict to issue the appropriate access/identity tokens.
             return SignIn(ticket.Principal, ticket.Properties, ticket.AuthenticationScheme);
@@ -126,7 +124,6 @@ namespace AureliaAuth.Server {
                     });
                 }
 
-
                 // Ensure the user is allowed to sign in. 
                 if (!await _signInManager.CanSignInAsync(user))
                 {
@@ -137,7 +134,6 @@ namespace AureliaAuth.Server {
                     });
                 }
 
-
                 // Reject the token request if two-factor authentication has been enabled by the user. 
                 if (_userManager.SupportsUserTwoFactor && await _userManager.GetTwoFactorEnabledAsync(user))
                 {
@@ -147,7 +143,6 @@ namespace AureliaAuth.Server {
                         ErrorDescription = "The specified user is not allowed to sign in."
                     });
                 }
-
 
                 // Ensure the user is not already locked out. 
                 if (_userManager.SupportsUserLockout && await _userManager.IsLockedOutAsync(user))
@@ -167,7 +162,6 @@ namespace AureliaAuth.Server {
                         await _userManager.AccessFailedAsync(user);
                     }
 
-
                     return BadRequest(new OpenIdConnectResponse
                     {
                         Error = OpenIdConnectConstants.Errors.InvalidGrant,
@@ -175,29 +169,16 @@ namespace AureliaAuth.Server {
                     });
                 }
 
-
                 if (_userManager.SupportsUserLockout)
                 {
                     await _userManager.ResetAccessFailedCountAsync(user);
                 }
 
-
-                var identity = await _userManager.CreateIdentityAsync(user, request.GetScopes());
-
-
-                // Create a new authentication ticket holding the user identity. 
-                var ticket = new AuthenticationTicket(
-                    new ClaimsPrincipal(identity),
-                    new AuthenticationProperties(),
-                   OpenIdConnectServerDefaults.AuthenticationScheme);
-
-                ticket.SetResources(request.GetResources());
-                ticket.SetScopes(request.GetScopes());
-
+                // Create a new authentication ticket.
+                var ticket = await CreateTicketAsync(request.GetScopes(), user);
 
                 return SignIn(ticket.Principal, ticket.Properties, ticket.AuthenticationScheme);
             }
-
 
             return BadRequest(new OpenIdConnectResponse
             {
@@ -206,6 +187,75 @@ namespace AureliaAuth.Server {
             });
         }
 
+        private async Task<AuthenticationTicket> CreateTicketAsync(IEnumerable<string> scopes, ApplicationUser user)
+        {
+            // Create a new ClaimsPrincipal containing the claims that
+            // will be used to create an id_token, a token or a code.
+            var principal = await _signInManager.CreateUserPrincipalAsync(user);
+
+            // Note: by default, claims are NOT automatically included in the access and identity tokens.
+            // To allow OpenIddict to serialize them, you must attach them a destination, that specifies
+            // whether they should be included in access tokens, in identity tokens or in both.
+
+            foreach (var claim in principal.Claims)
+            {
+                // In this sample, every claim is serialized in both the access and the identity tokens.
+                // In a real world application, you'd probably want to exclude confidential claims
+                // or apply a claims policy based on the scopes requested by the client application.
+                claim.SetDestinations(OpenIdConnectConstants.Destinations.AccessToken,
+                                      OpenIdConnectConstants.Destinations.IdentityToken);
+            }
+
+            // Create a new authentication ticket holding the user identity.
+            var ticket = new AuthenticationTicket(
+                principal, new AuthenticationProperties(),
+                OpenIdConnectServerDefaults.AuthenticationScheme);
+
+            // Set the list of scopes granted to the client application.
+            // Note: the offline_access scope must be granted
+            // to allow OpenIddict to return a refresh token.
+            ticket.SetScopes(new[] {
+                OpenIdConnectConstants.Scopes.OpenId,
+                OpenIdConnectConstants.Scopes.Email,
+                OpenIdConnectConstants.Scopes.Profile,
+                OpenIdConnectConstants.Scopes.OfflineAccess,
+                OpenIddictConstants.Scopes.Roles
+            }.Intersect(scopes));
+
+            return ticket;
+        }
+
+        [AllowAnonymous]
+        [HttpPost("~/connect/signup")]
+        [Produces("application/json")]
+        public async Task<IActionResult> SignUp([FromBody]JwtRegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.userName, Email = model.email };
+                var result = await _userManager.CreateAsync(user, model.password);
+                if (result.Succeeded)
+                {
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
+                    // Send an email with this link
+                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                    //await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
+                    //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
+                    // Create a new authentication ticket holding the user identity. 
+                    var scopes = model.scope.Split(' ');
+
+                    var ticket = await CreateTicketAsync(scopes, user);
+
+                    return SignIn(ticket.Principal, ticket.Properties, ticket.AuthenticationScheme);
+                }
+                else
+                    return Ok(false);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return Ok(false);
+        }
 
     }
 }

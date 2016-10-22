@@ -39,7 +39,7 @@ namespace AureliaAuth.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.userId, Email = model.userId };
+                var user = new ApplicationUser { UserName = model.userName, Email = model.email };
                 var result = await _userManager.CreateAsync(user, model.password);
                 if (result.Succeeded)
                 {

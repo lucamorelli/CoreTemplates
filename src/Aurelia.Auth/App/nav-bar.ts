@@ -22,7 +22,7 @@ export class NavBar {
     }
 
     @computedFrom('auth.authenticated')
-    get isAuthenticated(): boolean {
+    get isAuthenticated(): Boolean {
         return this.auth.authenticated;
     }
 

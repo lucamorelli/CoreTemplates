@@ -130,50 +130,8 @@ namespace AngularAuth
 
             app.UseStaticFiles();
 
-            // Add a middleware used to validate access
-            // tokens and protect the API endpoints.
-
-            // Alternatively, you can also use the introspection middleware.
-            // Using it is recommended if your resource server is in a
-            // different application/separated from the authorization server.
-            // 
-            // app.UseOAuthIntrospection(options => {
-            //     options.AutomaticAuthenticate = true;
-            //     options.AutomaticChallenge = true;
-            //     options.Authority = "http://localhost:54540/";
-            //     options.Audience = "resource_server";
-            //     options.ClientId = "resource_server";
-            //     options.ClientSecret = "875sqd4s5d748z78z7ds1ff8zz8814ff88ed8ea4z4zzd";
-            // });
-
-            //app.UseCsp(options => options.DefaultSources(directive => directive.Self())
-            //    .ImageSources(directive => directive.Self()
-            //        .CustomSources("*"))
-            //    .ScriptSources(directive => directive.Self()
-            //        .UnsafeInline())
-            //    .StyleSources(directive => directive.Self()
-            //        .UnsafeInline()));
-
-            //app.UseXContentTypeOptions();
-
-            //app.UseXfo(options => options.Deny());
-
-            //app.UseXXssProtection(options => options.EnabledWithBlockMode());
-
             app.UseIdentity();
             app.UseOAuthValidation();
-
-            //app.UseGoogleAuthentication(new GoogleOptions
-            //{
-            //    ClientId = "560027070069-37ldt4kfuohhu3m495hk2j4pjp92d382.apps.googleusercontent.com",
-            //    ClientSecret = "n2Q-GEw9RQjzcRbU3qhfTj8f"
-            //});
-
-            //app.UseTwitterAuthentication(new TwitterOptions
-            //{
-            //    ConsumerKey = "6XaCTaLbMqfj6ww3zvZ5g",
-            //    ConsumerSecret = "Il2eFzGIrYhz6BWjYhVXBPQSfZuS4xoHpSSyD9PI"
-            //});
 
             app.UseStatusCodePagesWithReExecute("/error");
 
