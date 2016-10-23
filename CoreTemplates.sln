@@ -24,6 +24,32 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Angular.WebPack", "src\Angu
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Angular.Auth.WebPack", "src\Angular.Auth.WebPack\Angular.Auth.WebPack.xproj", "{8F020E50-108F-467C-8008-0DBB2A7D8AC1}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Aurelia.WebPack", "src\Aurelia.WebPack\Aurelia.WebPack.xproj", "{D54279DA-AFC0-4F76-A594-63775651739C}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft.AspNetCore.Mvc", "..\..\..\1.0.1\Mvc\src\Microsoft.AspNetCore.Mvc\Microsoft.AspNetCore.Mvc.xproj", "{079EFA1F-0B0A-4853-B27B-5780D111CD85}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft.AspNetCore.Mvc.Abstractions", "..\..\..\1.0.1\Mvc\src\Microsoft.AspNetCore.Mvc.Abstractions\Microsoft.AspNetCore.Mvc.Abstractions.xproj", "{1154203C-7579-4525-906E-BC55268421C1}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft.AspNetCore.Mvc.ApiExplorer", "..\..\..\1.0.1\Mvc\src\Microsoft.AspNetCore.Mvc.ApiExplorer\Microsoft.AspNetCore.Mvc.ApiExplorer.xproj", "{A2B72833-5D70-4C42-AE85-E0319926FB8A}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft.AspNetCore.Mvc.Core", "..\..\..\1.0.1\Mvc\src\Microsoft.AspNetCore.Mvc.Core\Microsoft.AspNetCore.Mvc.Core.xproj", "{C48DA9D7-ACB5-4408-AA79-27ECB60A67EF}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft.AspNetCore.Mvc.Cors", "..\..\..\1.0.1\Mvc\src\Microsoft.AspNetCore.Mvc.Cors\Microsoft.AspNetCore.Mvc.Cors.xproj", "{9A07EEA2-942E-4969-9D41-799B6E2D1FF5}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft.AspNetCore.Mvc.DataAnnotations", "..\..\..\1.0.1\Mvc\src\Microsoft.AspNetCore.Mvc.DataAnnotations\Microsoft.AspNetCore.Mvc.DataAnnotations.xproj", "{2DD786CA-7AF7-437A-B499-801A589B9A1C}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft.AspNetCore.Mvc.Formatters.Json", "..\..\..\1.0.1\Mvc\src\Microsoft.AspNetCore.Mvc.Formatters.Json\Microsoft.AspNetCore.Mvc.Formatters.Json.xproj", "{3FC8D9D6-9352-43A3-8E81-422F270085B7}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft.AspNetCore.Mvc.Localization", "..\..\..\1.0.1\Mvc\src\Microsoft.AspNetCore.Mvc.Localization\Microsoft.AspNetCore.Mvc.Localization.xproj", "{50893B10-5735-4F35-9995-F81DA3F0189E}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft.AspNetCore.Mvc.Razor", "..\..\..\1.0.1\Mvc\src\Microsoft.AspNetCore.Mvc.Razor\Microsoft.AspNetCore.Mvc.Razor.xproj", "{314E9AD6-2FFC-4A92-A8AD-510658C64F1E}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft.AspNetCore.Mvc.Razor.Host", "..\..\..\1.0.1\Mvc\src\Microsoft.AspNetCore.Mvc.Razor.Host\Microsoft.AspNetCore.Mvc.Razor.Host.xproj", "{520B3AA4-363A-497C-8C15-80423C5AFC85}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft.AspNetCore.Mvc.TagHelpers", "..\..\..\1.0.1\Mvc\src\Microsoft.AspNetCore.Mvc.TagHelpers\Microsoft.AspNetCore.Mvc.TagHelpers.xproj", "{B2347320-308E-4D2B-AEC8-005DFA68B0C9}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft.AspNetCore.Mvc.ViewFeatures", "..\..\..\1.0.1\Mvc\src\Microsoft.AspNetCore.Mvc.ViewFeatures\Microsoft.AspNetCore.Mvc.ViewFeatures.xproj", "{3F8B8FC1-9FE4-4788-8991-367113E8D7AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +80,58 @@ Global
 		{8F020E50-108F-467C-8008-0DBB2A7D8AC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F020E50-108F-467C-8008-0DBB2A7D8AC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F020E50-108F-467C-8008-0DBB2A7D8AC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D54279DA-AFC0-4F76-A594-63775651739C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D54279DA-AFC0-4F76-A594-63775651739C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D54279DA-AFC0-4F76-A594-63775651739C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D54279DA-AFC0-4F76-A594-63775651739C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{079EFA1F-0B0A-4853-B27B-5780D111CD85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{079EFA1F-0B0A-4853-B27B-5780D111CD85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{079EFA1F-0B0A-4853-B27B-5780D111CD85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{079EFA1F-0B0A-4853-B27B-5780D111CD85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1154203C-7579-4525-906E-BC55268421C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1154203C-7579-4525-906E-BC55268421C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1154203C-7579-4525-906E-BC55268421C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1154203C-7579-4525-906E-BC55268421C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2B72833-5D70-4C42-AE85-E0319926FB8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2B72833-5D70-4C42-AE85-E0319926FB8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2B72833-5D70-4C42-AE85-E0319926FB8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2B72833-5D70-4C42-AE85-E0319926FB8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C48DA9D7-ACB5-4408-AA79-27ECB60A67EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C48DA9D7-ACB5-4408-AA79-27ECB60A67EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C48DA9D7-ACB5-4408-AA79-27ECB60A67EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C48DA9D7-ACB5-4408-AA79-27ECB60A67EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A07EEA2-942E-4969-9D41-799B6E2D1FF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A07EEA2-942E-4969-9D41-799B6E2D1FF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A07EEA2-942E-4969-9D41-799B6E2D1FF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A07EEA2-942E-4969-9D41-799B6E2D1FF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DD786CA-7AF7-437A-B499-801A589B9A1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DD786CA-7AF7-437A-B499-801A589B9A1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DD786CA-7AF7-437A-B499-801A589B9A1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DD786CA-7AF7-437A-B499-801A589B9A1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FC8D9D6-9352-43A3-8E81-422F270085B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FC8D9D6-9352-43A3-8E81-422F270085B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FC8D9D6-9352-43A3-8E81-422F270085B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FC8D9D6-9352-43A3-8E81-422F270085B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50893B10-5735-4F35-9995-F81DA3F0189E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50893B10-5735-4F35-9995-F81DA3F0189E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50893B10-5735-4F35-9995-F81DA3F0189E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50893B10-5735-4F35-9995-F81DA3F0189E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{314E9AD6-2FFC-4A92-A8AD-510658C64F1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{314E9AD6-2FFC-4A92-A8AD-510658C64F1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{314E9AD6-2FFC-4A92-A8AD-510658C64F1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{314E9AD6-2FFC-4A92-A8AD-510658C64F1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{520B3AA4-363A-497C-8C15-80423C5AFC85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{520B3AA4-363A-497C-8C15-80423C5AFC85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{520B3AA4-363A-497C-8C15-80423C5AFC85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{520B3AA4-363A-497C-8C15-80423C5AFC85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2347320-308E-4D2B-AEC8-005DFA68B0C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2347320-308E-4D2B-AEC8-005DFA68B0C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2347320-308E-4D2B-AEC8-005DFA68B0C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2347320-308E-4D2B-AEC8-005DFA68B0C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F8B8FC1-9FE4-4788-8991-367113E8D7AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F8B8FC1-9FE4-4788-8991-367113E8D7AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F8B8FC1-9FE4-4788-8991-367113E8D7AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F8B8FC1-9FE4-4788-8991-367113E8D7AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,5 +143,6 @@ Global
 		{30D76DBC-EF0B-4BB3-8209-D7AEF7D4726D} = {59070090-C342-4444-99D2-C8AA89084B63}
 		{4199E133-EA63-4F1A-BC76-3EEDB8E457B4} = {59070090-C342-4444-99D2-C8AA89084B63}
 		{8F020E50-108F-467C-8008-0DBB2A7D8AC1} = {59070090-C342-4444-99D2-C8AA89084B63}
+		{D54279DA-AFC0-4F76-A594-63775651739C} = {59070090-C342-4444-99D2-C8AA89084B63}
 	EndGlobalSection
 EndGlobal
