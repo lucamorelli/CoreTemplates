@@ -62,20 +62,16 @@ namespace Angular
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            //var options = new DefaultFilesOptions
-            //{
-            //    DefaultFileNames = new[] { "default.html", "index.html" }
-            //};
-            //app.UseDefaultFiles(options);
+            var options = new DefaultFilesOptions
+            {
+                DefaultFileNames = new[] { "default.html", "index.html" }
+            };
+            app.UseDefaultFiles(options);
 
             app.UseStaticFiles();
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });

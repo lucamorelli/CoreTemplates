@@ -25,7 +25,7 @@ var sharedConfig = {
 // Configuration for client-side bundle suitable for running in browsers
 var clientBundleOutputDir = './wwwroot/dist';
 var clientBundleConfig = merge(sharedConfig, {
-    entry: { 'main-client': './ClientApp/boot-client.ts' },
+    entry: { 'main-client': './ClientApp/main.ts' },
     output: { path: path.join(__dirname, clientBundleOutputDir) },
     plugins: [
         new webpack.DllReferencePlugin({

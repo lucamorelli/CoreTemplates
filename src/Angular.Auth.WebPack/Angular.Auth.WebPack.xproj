@@ -7,8 +7,8 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>4199e133-ea63-4f1a-bc76-3eedb8e457b4</ProjectGuid>
-    <RootNamespace>Angular</RootNamespace>
+    <ProjectGuid>8f020e50-108f-467c-8008-0dbb2a7d8ac1</ProjectGuid>
+    <RootNamespace>AngularAuth</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>

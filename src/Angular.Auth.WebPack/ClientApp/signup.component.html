@@ -1,0 +1,25 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="center-form panel col-md-6">
+            <div class="panel-body">
+                <h2 class="text-center">Log in</h2>
+                <form method="post" name="loginForm">
+                    <div class="form-group has-feedback">
+                        <input class="form-control input-lg" type="text" name="username" [(ngModel)]="username" placeholder="User Name" required autofocus>
+                        <span class="ion-at form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input class="form-control input-lg" type="email" name="email" [(ngModel)]="email" placeholder="Email" required>
+                        <span class="ion-at form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input class="form-control input-lg" type="password" name="password" [(ngModel)]="password" placeholder="Password" required>
+                        <span class="ion-key form-control-feedback"></span>
+                    </div>
+                    <button type="submit" (click)="login()" class="btn btn-lg  btn-block btn-success">Signup</button>
+                    <br />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
